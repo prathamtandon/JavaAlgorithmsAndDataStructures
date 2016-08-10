@@ -39,8 +39,8 @@ public class Stack<Item> implements Iterable<Item> {
         return new ReverseArrayIterator();
     }
 
-    public Stack(int cap) {
-        a = (Item[]) new Object[cap];
+    public Stack() {
+        a = (Item[]) new Object[1];
     }
 
     public boolean isEmpty() {
