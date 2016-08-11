@@ -15,11 +15,28 @@ public class Queue<Item> implements Iterable<Item> {
         Node next;
     }
 
+    private class QueueIterator implements Iterator<Item> {
+        private Node cur = first;
+        public boolean hasNext() {
+            return cur != null;
+        }
+
+        public Item next() {
+            Node t = cur;
+            cur = cur.next;
+            return t.item;
+        }
+
+        public void remove() {
+
+        }
+    }
+
     public boolean isEmpty() { return N == 0; }
     public int size() { return N; }
 
     public Iterator<Item> iterator() {
-        return null;
+        return new QueueIterator();
     }
 
     public void enqueue(Item item) {
