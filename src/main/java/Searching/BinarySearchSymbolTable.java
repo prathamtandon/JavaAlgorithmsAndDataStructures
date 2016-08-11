@@ -31,7 +31,18 @@ public class BinarySearchSymbolTable<Key extends Comparable<Key>, Value> {
     }
 
     public int rank(Key key) {
-        return -1;
+        return rank(key, 0, N-1);
+    }
+
+    private int rank(Key key, int lo, int hi) {
+        if(hi < lo) return lo;
+        int mid = lo + (hi - lo) / 2;
+        int compare = keys[mid].compareTo(key);
+        if(compare == 0) return mid;
+        else if(compare < 0)
+            return rank(key, mid+1, hi);
+        else
+            return rank(key, lo, mid-1);
     }
 
     public void put(Key key, Value val) {
