@@ -1,5 +1,7 @@
 package Searching;
 
+import Collections.Queue;
+
 /**
  * Created by prathamt on 8/11/16.
  */
@@ -62,4 +64,53 @@ public class BinarySearchSymbolTable<Key extends Comparable<Key>, Value> {
         N++;
     }
 
+    public Key min() {
+        return keys[0];
+    }
+
+    public Key max() {
+        return keys[N-1];
+    }
+
+    public Key select(int k) {
+        return keys[k];
+    }
+
+    public Key ceiling(Key k) {
+        int i = rank(k);
+        return select(i);
+    }
+
+    public Key floor(Key k) {
+        int i = rank(k);
+        if(i < N && keys[i].compareTo(k) == 0)
+            return k;
+        return select(i-1);
+    }
+
+    public Key delete(Key k) {
+        int i = rank(k);
+        if(!(i < N && keys[i].compareTo(k) == 0))
+            return null;
+        for (int j = i; j < N-1; j++) {
+            keys[j] = keys[j+1];
+        }
+        N--;
+        return k;
+    }
+
+    public boolean contains(Key k) {
+        int i = rank(k);
+        return i < N && keys[i].compareTo(k) == 0;
+    }
+
+    public Iterable<Key> keys(Key lo, Key hi) {
+        Queue<Key> q = new Queue<Key>();
+        for (int i = rank(lo); i < rank(hi); i++) {
+            q.enqueue(keys[i]);
+        }
+        if(contains(hi))
+            q.enqueue(keys[rank(hi)]);
+        return q;
+    }
 }
