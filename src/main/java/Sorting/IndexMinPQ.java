@@ -5,9 +5,9 @@ package Sorting;
  */
 public class IndexMinPQ<Item extends Comparable<Item>> {
 
-    private int[] pq;
-    private Item[] items;
-    private int[] qp;
+    private int[] pq;       //  keys associated with items
+    private Item[] items;   //  actual items
+    private int[] qp;       //  inverted index on keys
     private int N = 0;
 
     public IndexMinPQ(int maxN) {
@@ -62,14 +62,14 @@ public class IndexMinPQ<Item extends Comparable<Item>> {
             sink(cur);
     }
 
-    public Item delMin() {
+    public int delMin() {
         Item min = items[1];
         int key = pq[1];
         exch(1, N--);
         items[N+1] = null;
         qp[key] = -1;
         sink(1);
-        return min;
+        return key;
     }
 
     public void change(int k, Item item) {
@@ -100,5 +100,7 @@ public class IndexMinPQ<Item extends Comparable<Item>> {
             k = j;
         }
     }
+
+    public boolean isEmpty() { return N == 0; }
 
 }
