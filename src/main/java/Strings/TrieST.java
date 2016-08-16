@@ -47,6 +47,36 @@ public class TrieST<Value> {
         return q;
     }
 
+    public Iterable<String> keysThatMatch(String pat) {
+        Queue<String> q = new Queue<String>();
+        collect(root, "", pat, q);
+        return q;
+    }
+
+    public String longestPrefixOf(String s) {
+        int length = search(root, s, 0, 0);
+        return s.substring(0, length);
+    }
+
+    private int search(Node x, String s, int d, int max) {
+        if(x == null) return max;
+        if(x.val != null) max = d;
+        if(d == s.length()) return max;
+        char c = s.charAt(d);
+        return search(x.next[c], s, d+1, max);
+    }
+
+    private void collect(Node x, String pre, String pat, Queue<String> q) {
+        if(x == null) return;
+        int d = pre.length();
+        if(d == pat.length() && x.val != null) q.enqueue(pre);
+        if(d == pat.length()) return;
+        char next = pat.charAt(d);
+        for(char c = 0; c < R; c++)
+            if(next == '.' || next == c)
+                collect(x.next[c], pre + c, pat, q);
+    }
+
     private void collect(Node x, String pre, Queue<String> q) {
         if(x == null) return;
         if(x.val != null) q.enqueue(pre);
