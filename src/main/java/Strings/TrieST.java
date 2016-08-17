@@ -83,4 +83,24 @@ public class TrieST<Value> {
         for(char c = 0; c < R; c++)
             collect(x.next[c], pre + c, q);
     }
+
+    public void delete(String key) {
+        root = delete(root, key, 0);
+    }
+
+    public Node delete(Node x, String s, int d) {
+        if(x == null) return x;
+        if(d == s.length())
+            x.val = null;
+        else {
+            char c = s.charAt(d);
+            x.next[c] = delete(x.next[c], s, d+1);
+        }
+        if(x.val != null) return x;
+        for(char c = 0; c < R; c++)
+            if(x.next[c] != null)
+                return x;
+
+        return null;
+    }
 }
