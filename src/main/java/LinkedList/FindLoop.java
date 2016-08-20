@@ -14,19 +14,15 @@ public class FindLoop {
         Node slow = head;
         Node fast = head;
 
-        while(fast != null && slow != null) {
+        while(fast != null && fast.next != null && slow != null) {
             slow = slow.next;
-            fast = fast.next;
-            if(fast == null)
-                return null;
-            else
-                fast = fast.next;
+            fast = fast.next.next;
             if(slow == fast) {
                 break;
             }
         }
 
-        if(fast == null)
+        if(fast == null || fast.next == null)
             return null;
         slow = head;
         while(slow != head) {
