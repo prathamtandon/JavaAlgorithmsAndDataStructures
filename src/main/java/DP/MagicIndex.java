@@ -43,7 +43,7 @@ public class MagicIndex {
 
         return rightResult;
     }
-    
+
     public int magicIndexNonDistinct(int[] array) {
         return magicIndexNonDistinctHelper(array, 0, array.length - 1);
     }
