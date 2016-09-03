@@ -65,7 +65,7 @@ public class BinarySearchTree<Key extends Comparable<Key>, Value> {
 
     private Key select(Node x, int i) {
         if(x == null) return null;
-        int t = x.left.N;
+        int t = size(x.left);
         if(t > i) return select(x.left, i);
         else if(t < i) return select(x.right, i-t-1);
         return x.key;
