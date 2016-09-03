@@ -38,8 +38,7 @@ public class MissingAndRepeating {
         }
 
         // group1 now contains the missing and group2 the repeating number
-        System.out.println("Missing: " + String.valueOf(group1));
-        System.out.println("Repeating: " + String.valueOf(group2));
+        System.out.println(String.format("The two elements are: %d and %d", group1, group2));
 
     }
 
