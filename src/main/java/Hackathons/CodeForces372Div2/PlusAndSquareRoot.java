@@ -1,7 +1,9 @@
 package Hackathons.CodeForces372Div2;
 
+import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Created by prathamt on 9/17/16.
@@ -24,8 +26,8 @@ public class PlusAndSquareRoot {
     }
 
     public ArrayList<BigInteger> getPlusPresses() {
-        BigInteger temp = nextLevel.pow(2);
-        square = temp;
+        BigInteger temp = nextLevel;
+        square = temp.pow(2);
         while(true) {
             BigInteger difference = square.subtract(currentNumber);
             if(difference.mod(currentLevel).equals(BigInteger.ZERO)) {
@@ -36,21 +38,24 @@ public class PlusAndSquareRoot {
                 currentNumber = temp;
                 currentLevel = nextLevel;
                 nextLevel = currentLevel.add(BigInteger.ONE);
-                temp = nextLevel.pow(2);
-                square = temp;
+                temp = nextLevel;
+                square = temp.pow(2);
             } else {
-                temp = temp.subtract(nextLevel);
+                temp = square.subtract(nextLevel);
                 square = temp.pow(2);
             }
         }
     }
 
     public static void main(String[] args) {
-        long n = 10000L;
+        Scanner in = new Scanner(System.in);
+        PrintWriter out = new PrintWriter(System.out);
+        int n = in.nextInt();
         PlusAndSquareRoot obj = new PlusAndSquareRoot(new BigInteger(String.valueOf(n)).add(BigInteger.ONE));
         ArrayList<BigInteger> result = obj.getPlusPresses();
         for(BigInteger count: result) {
-            System.out.println(count.toString());
+            out.println(count.toString());
         }
+        out.close();
     }
 }
